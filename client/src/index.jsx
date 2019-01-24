@@ -15,7 +15,8 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+    // TODO use the Search component to post the username to the server
+    //use $post
   }
 
   render () {
