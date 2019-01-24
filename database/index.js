@@ -1,21 +1,18 @@
 const mongoose = require('mongoose');
-var uniqueValidator = require('mongoose-unique-validator')
 
-mongoose.connect('mongodb://localhost/fetcher3', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/fetcher4', {useNewUrlParser: true});
 
-let repoSchema = mongoose.Schema({
-  node_id: {type: String, required: true, unique: true , dropDups: true},   
+let repoSchema = mongoose.Schema({   
   name: String,
-  full_name: String,
+  full_name: {type: String, required: true, unique: true , dropDups: true},
   html_url: String,
   stargazers_count: Number,
   open_issues_count: Number
 });
-repoSchema.plugin(uniqueValidator);
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (repos, callback) => {
+let save = (repos) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
@@ -23,7 +20,6 @@ let save = (repos, callback) => {
   //we need to add each item in the list to our database as long as its not a duplicate 
   repos.forEach(function(repo, index) {
     repo = new Repo({
-      node_id: repo.node_id,
       name: repo.name,
       full_name: repo.full_name,
       html_url: repo.html_url,
