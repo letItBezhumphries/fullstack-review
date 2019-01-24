@@ -7,7 +7,7 @@ let repoSchema = mongoose.Schema({
   full_name: String,
   html_url: String,
   stargazers_count: Number,
-  open_issues_count: Number,
+  open_issues_count: Number
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
