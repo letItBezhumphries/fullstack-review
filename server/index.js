@@ -1,6 +1,8 @@
 const express = require('express');
 let app = express();
 const bodyParser = require('body-parser');
+const githubApi = require('../helpers/github')
+
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json())
@@ -12,6 +14,12 @@ app.post('/repos', function (req, res) {
   // and get the repo information from the github API, then
   // save the repo information in the database
   console.log(req.body.username);
+  //user the getRepos from helpers and add the username and a 
+  githubApi.getReposByUsername(req.body.username, function(err, res, repos) {
+    if(err) throw err;
+    console.log(res);
+  })
+
 });
 
 app.get('/repos', function (req, res) {
