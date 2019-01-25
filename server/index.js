@@ -9,25 +9,29 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.post('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
   console.log(req.body.username);
-  //user the getRepos from helpers and add the username and a 
+  
   githubApi.getReposByUsername(req.body.username, function(err, repos) {
-    if(err) throw err;
-    console.log(Array.isArray(repos));
-    //receiving a list/array of the repos
-    //use the save function passing in the repos
-    db.save(repos);
-  })
-
+    if(err) {
+      console.log(err)
+    } else {
+      db.save(repos);
+      res.end() 
+    }
+  });
 });
 
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+  db.fetchTop25(function(err, repos) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log('in the server fetch')
+      res.send(JSON.stringify(repos));
+    }
+  })
 });
 
 let port = 1128;

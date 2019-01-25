@@ -10,7 +10,6 @@ class Search extends React.Component {
 
   onChange (e) {
     const username = e.target.value;
-    console.log(username);
     this.setState({
       term: e.target.value
     });

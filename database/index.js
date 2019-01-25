@@ -12,7 +12,7 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (repos) => {
+let save = (repos, callback) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
@@ -26,15 +26,33 @@ let save = (repos) => {
       stargazers_count: repo.stargazers_count,
       open_issues_count: repo.open_issues_count
     })
-    repo.save(function(err) {
+    repo.save(function(err, repos) {
       if(err) {
         console.log('error saving to the dbase', err);
       } else {
-        console.log('Success saving repo to database', repo);
+        callback(null, repos);
       }
     });
   })
-
 }
 
-module.exports.save = save;
+let fetchTop25 = (callback) => {
+  
+  Repo.find(function(err, repos) {
+    if(err) {
+      console.log('there was an error in the query', err);
+    } else {
+      console.log('should be getting repos here');
+      callback(null, repos);
+    }
+  })
+  .sort({stargazers_count: -1, open_issues_count: 1 })
+  .limit(25)
+  
+
+};
+
+module.exports = {
+  save,
+  fetchTop25
+}
