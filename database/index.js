@@ -49,8 +49,6 @@ let fetchTop25 = (callback) => {
   })
   .sort({stargazers_count: -1, open_issues_count: 1 })
   .limit(25)
-  
-
 };
 
 module.exports = {

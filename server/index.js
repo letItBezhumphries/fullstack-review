@@ -16,7 +16,9 @@ app.post('/repos', function (req, res) {
     if(err) {
       console.log(err)
     } else {
-      db.save(repos);
+      db.save(repos, function() {
+        res.sendStatus(201);
+      });
     }
   });
 });
