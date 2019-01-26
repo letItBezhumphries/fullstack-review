@@ -29,7 +29,7 @@ class App extends React.Component {
     //use $post
     var app = this;
     $.post('/repos', { username: term }, function(response) {
-      this.getTopRepos();
+      app.getTopRepos();
     });
   }
 
