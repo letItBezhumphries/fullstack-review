@@ -3,6 +3,7 @@ let app = express();
 const bodyParser = require('body-parser');
 const githubApi = require('../helpers/github')
 const db = require('../database/index');
+require('dotenv').config();
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json())
@@ -32,9 +33,9 @@ app.get('/repos', function (req, res) {
   })
 });
 
-let port = 1128;
+const PORT = process.env.PORT;
 
-app.listen(port, function() {
-  console.log(`listening on port ${port}`);
+app.listen(PORT, function() {
+  console.log(`listening on port ${PORT}`);
 });
 
