@@ -10,7 +10,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.post('/repos', function (req, res) {
-  console.log(req.body.username);
   
   githubApi.getReposByUsername(req.body.username, function(err, repos) {
     if(err) {

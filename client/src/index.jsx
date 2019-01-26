@@ -14,12 +14,9 @@ class App extends React.Component {
   }
 
   getTopRepos() {
-    console.log('before get', this);
     var app = this;
     $.get('/repos', function(response) {
-      console.log('this is on the success of the getTopRepos request');
       var repos = JSON.parse(response);
-      console.log('repos', repos);
       app.setState({
         repos: repos
       })
@@ -32,8 +29,7 @@ class App extends React.Component {
     //use $post
     var app = this;
     $.post('/repos', { username: term }, function(response) {
-      console.log("repos from search post", response);
-      // this.getTopRepos();
+      this.getTopRepos();
     });
   }
 
