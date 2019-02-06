@@ -10,7 +10,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.post('/repos', function (req, res) {
-  
+  console.log('here in app.post')
   githubApi.getReposByUsername(req.body.username, function(err, repos) {
     if(err) {
       console.log(err)
@@ -22,7 +22,8 @@ app.post('/repos', function (req, res) {
   });
 });
 
-app.get('/repos', function (req, res) { 
+app.get('/repos', function (req, res) {
+  console.log('here in the get/repos') 
   // This route should send back the top 25 repos
   db.fetchTop25(function(err, repos) {
     if(err) {
@@ -34,7 +35,7 @@ app.get('/repos', function (req, res) {
   })
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 1128;
 
 app.listen(PORT, function() {
   console.log(`listening on port ${PORT}`);

@@ -23,7 +23,7 @@ let getReposByUsername = (username, callback) => {
     if(err) {
       callback(err, null);
     } else {
-      console.log('from helper request', dataRepos);
+      // console.log('from helper request', dataRepos);
       callback(null, JSON.parse(dataRepos));
     }
   })

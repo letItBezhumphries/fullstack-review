@@ -37,8 +37,7 @@ let save = (repos, callback) => {
   })
 }
 
-let fetchTop25 = (callback) => {
-  
+let fetchTop25 = (callback) => {  
   Repo.find(function(err, repos) {
     if(err) {
       console.log('there was an error in the query', err);
